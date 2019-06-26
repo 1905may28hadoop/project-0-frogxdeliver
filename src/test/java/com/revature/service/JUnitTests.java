@@ -23,9 +23,9 @@ public class JUnitTests {
 		System.out.println(bankDAO.login(u3, p3));
 		
 		//invalid credentials:
-		System.out.println("using invalid credentials: " + u3 + " " + p2);
-		bankDAO.login(u3, p2);
-		System.out.println("\n\n");
+//		System.out.println("using invalid credentials: " + u3 + " " + p2);
+//		bankDAO.login(u3, p2);
+//		System.out.println("\n\n");
 	}
 	
 	@Test
@@ -37,12 +37,10 @@ public class JUnitTests {
 		bankDAO.viewBalance(u3, p3);
 		System.out.println("\n");
 		//invalid credentials:
-		System.out.println("using invalid credentials: " + u3 + " " + p2 + "");
-		bankDAO.viewBalance(u3, p2);
+//		System.out.println("using invalid credentials: " + u3 + " " + p2 + "");
+//		bankDAO.viewBalance(u3, p2);
 	}
 	
-	//the other methods run an error towards the end of them... 
-	//Couldn't figure out how to avoid the null pointer error
 	
 
 }

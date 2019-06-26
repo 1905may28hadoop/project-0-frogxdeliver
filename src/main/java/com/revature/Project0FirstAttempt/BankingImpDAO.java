@@ -180,7 +180,7 @@ public class BankingImpDAO implements BankingDAO{
 		newTotal = oldTotal - amount;
 		
 		if (amount > oldTotal) {
-			throw new ErrorMessage(amount);
+			throw new ErrorMessage(oldTotal);
 		}
 		
 		
