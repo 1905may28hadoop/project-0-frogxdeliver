@@ -13,8 +13,8 @@ public class Console {
  
 		Scanner in = new Scanner(System.in);
 		int userNum = 0;				//used for the user input
-		String userName; 				//storing the username & pass for accessing the database
-		String userPass;
+		String userName = ""; 				//storing the username & pass for accessing the database
+		String userPass = "";
 		float withdrawAmount;
 		float depositAmount;
 		
@@ -65,15 +65,18 @@ public class Console {
 			
 
 			case 1:
+				//temp variables for hardcoding
+//				userName = "user1";
+//				userPass = "pass1";
+				
 				//TODO
 				//UNCOMMENT AFTER TESTING
 				//get's the userName and Password from the user, and runs the login method to check if the inputed values
 				//are within the current DB
-//				System.out.print("\nEnter your username: ");
-//				userName = in.next();
-//				System.out.print("Enter your password: ");
-//				userPass = in.next();
-				
+				System.out.print("\nEnter your username: ");
+				userName = in.next();
+				System.out.print("Enter your password: ");
+				userPass = in.next();
 				
 				//TODO
 				//Error code2 here
@@ -86,13 +89,11 @@ public class Console {
 //					} 
 //				}
 				
-				//temp variables for hardcoding
-				userName = "user1";
-				userPass = "pass1";
+				
+				
 				//set the values to the private members
 				bank.setLogin_username(userName);
 				bank.setLogin_password(userPass);
-				
 				//prints statements, then writes the user info to a file
 				System.out.println(bankDAO.login(userName, userPass));
 				userNum = 0;
@@ -110,7 +111,7 @@ public class Console {
 					bankDAO.login(bank.getLogin_username(), bank.getLogin_password());
 				} catch (IOException e3) {
 					// TODO Auto-generated catch block
-					e3.printStackTrace();
+//					e3.printStackTrace();
 				}
 				userNum = 0;
 				break;
