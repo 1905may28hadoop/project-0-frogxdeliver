@@ -1,0 +1,58 @@
+/*
+Account_Number (primary key)
+Login_Username (varchar)
+Login_Password (varchar)
+Current_Balance (double(100, 2))
+
+*/
+
+drop table testbank;
+
+--table and cells below
+create table testBank(
+    Account_Number number,
+    Login_Username varchar(100),
+    Login_Password varchar(100),
+    Current_Balance float
+);
+
+insert into testBank values(1, 'user1','pass1', 1000.11);
+insert into testBank values(2, 'user2','pass2', 2000.22);
+insert into testBank values(3, 'user3','pass3', 3000.33);
+insert into testBank values(4, 'user4','pass4', 4000.44);
+insert into testBank values(5, 'user5','pass5', 5000.55);
+insert into testBank values(6, 'user6','pass6', 6000.66);
+
+insert into testBank values(7, 'user7', 'pass7', 7000.77);
+insert into testBank values(8, 'user8', 'pass8', 8000.88);
+commit;
+
+select *
+from testBank;
+
+
+
+
+--used to show the current_balance of a user
+select current_balance
+from testBank
+where login_username='user1' and login_password='pass1';
+
+
+--used in the prepared statement to check if the user exists
+select *
+from testBank
+where login_username = 'user1' AND login_password = 'pass1';
+
+
+
+
+
+--used as a prepared statement to withdrawing money
+update testBank
+set current_balance = 1000.55
+where login_username = 'user1' AND login_password='pass1';
+
+
+
+
