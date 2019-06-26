@@ -3,6 +3,7 @@ package com.revature.Project0FirstAttempt;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
 
 import com.revature.exception.ErrorMessage;
 
@@ -18,7 +19,7 @@ public class Console {
 		float withdrawAmount;
 		float depositAmount;
 		
-		
+		Logger logger = Logger.getLogger(Banking.class);
 		
 		
 		//TODO: add exception handling for if the user enters an invalid character (like a string)
@@ -47,7 +48,10 @@ public class Console {
 			System.out.println("Exit                    6");
 			System.out.print("\nChoose an option 1-6: ");
 			
-			userNum = in.nextInt();		
+			userNum = in.nextInt();
+			
+			
+			
 			//TODO
 			//figure out why this doesn't work ;-;
 			//in case the user enters a invalid character
@@ -100,18 +104,23 @@ public class Console {
 				break;
 				
 			//DEPOSIT
+			//adds the user's input to the current balance on the DB
 			case 2:
-				//messy, but adds the amount the user inputs to the current balance on the DB
+//				try {
+//					System.out.println("current balance: " + bankDAO.readFromFile(3));
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
 				System.out.println("Enter an amount to deposit: ");
 				depositAmount = in.nextFloat();
+				
 				try {
 					System.out.println(bankDAO.deposit(depositAmount, bank.getLogin_username(), bank.getLogin_password()));
 					//writes the change to the file. 
 					//I kept getting errors referencing null pointers, so this is the makeshift version that works
 					bankDAO.login(bank.getLogin_username(), bank.getLogin_password());
 				} catch (IOException e3) {
-					// TODO Auto-generated catch block
-//					e3.printStackTrace();
+					logger.error(e3);
 				}
 				userNum = 0;
 				break;
@@ -143,12 +152,12 @@ public class Console {
 			//WITHDRAW
 			//subtracts the user's current balance on the DB by the amount the user enters
 			case 4:
-//				System.out.println("\nWithdraw");
-				try {
-					System.out.println(bankDAO.readFromFile(3));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+//				try {
+//					System.out.println("current balance: " + bankDAO.readFromFile(3));
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
+				
 				System.out.println("Enter an amount to withdraw: ");
 				withdrawAmount = in.nextFloat();
 				
@@ -162,7 +171,8 @@ public class Console {
 //					e.printStackTrace();
 					System.out.println(e);
 				}catch (IOException e1) {
-					e1.printStackTrace();
+//					e1.printStackTrace();
+					logger.error(e1);
 				} 
 				
 //				bankDAO.writeToFile(bankDAO.login(bank.getLogin_username(), bank.getLogin_password()));
@@ -170,6 +180,7 @@ public class Console {
 				break;
 				
 			//LOGOUT
+			//empties the userInfo.txt
 			case 5:
 				//Exits the loop
 				System.out.println("\nUser logged out");
@@ -181,10 +192,13 @@ public class Console {
 				
 			
 			//EXIT
+			//empties the userInfo.txt and exits the loop
 			case 6:
-				//Exits the loop
 				System.out.println("\nHave a good day!");
-				userNum = 7;
+				//wipe data from file, to login another user
+				bankDAO.logout();
+				//Exits the loop
+				userNum = 7;	
 				break;
 				
 			//DEFAULT ERROR

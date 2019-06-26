@@ -17,6 +17,8 @@ import com.revature.exception.ErrorMessage;
 
 public class BankingImpDAO implements BankingDAO{
 
+	public Logger logger = Logger.getLogger(Banking.class);
+
 	@Override
 	//checks if the user has valid credentials, and set's the variables necessary to retrieve that user's data
 	public String login(String username, String pass) {
@@ -41,7 +43,8 @@ public class BankingImpDAO implements BankingDAO{
 			conn.close();
 		}catch(SQLException e) {
 			validB = false;
-			e.printStackTrace();
+//			e.printStackTrace();
+			logger.error(e);
 		}finally {
 			//will only write the changes if the user is validated
 			if(validB) {
@@ -109,9 +112,11 @@ public class BankingImpDAO implements BankingDAO{
 			//resultSet.next();
 			//4 lines above the first comment
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			logger.error(e);
 		}catch(NullPointerException e){
-			e.printStackTrace();
+//			e.printStackTrace();
+			logger.error(e);
 		}finally {
 			CloseStreams.close(statement);
 			CloseStreams.close(resultSet);
@@ -227,9 +232,11 @@ public class BankingImpDAO implements BankingDAO{
 			fileWriter.write(bank.getCurrent_balance() + "\n");
 			fileWriter.close();
 		}  catch(FileNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			logger.error(e);
 		}catch(IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			logger.error(e);
 		}
 		
 	}
@@ -262,9 +269,11 @@ public class BankingImpDAO implements BankingDAO{
 			fileWriter.write(" ");
 			fileWriter.close();
 		}  catch(FileNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			logger.error(e);
 		}catch(IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
